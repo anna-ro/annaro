@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}As Seen On{% endblock %}
+{% block extrahead %}
+  <meta name="keywords" content="python pyladies infrastructure sre devops djangogirls">
+
+  <meta name="og:title" content="As Seen On">
+  <meta name="og:url" content="{{ get_url(absolute=True) }}fingerprints">
+  <meta name="og:type" content="website">
+  <meta name="og:image" content="{{ get_url(get_asset('images/favicon/favicon.ico'), absolute=True) }}">
+  <meta name="og:description" content="Just a little humblebragging">
+
+  <meta name="twitter:title" content="As Seen On">
+  <meta name="twitter:description" content="Just a little humblebragging">
+{% endblock %}
+{% block me %}<li class="navbar-me"><a href="{{ get_url('/') }}" title="Home">lynn root</a></li>{% endblock %}
+{% block content %}
+    <div class="page-header">
+      <h1 id="talklist">As Seen On...</h1>
+      <small>Just a little humblebragging.</small>
+    </div>
+    {% for item in containers.fingerprints %}
+      <div class="dl-horizontal dl-horizontal-border" style="padding-bottom: 10px;">
+        <dt style="padding-top: 26px;padding-right:3px;"><small>{{ item.date }}</small></dt>
+        <dd><h4>{{ item.source }}</h4></dd>
+        <dt style="padding-top:5px;"><p>{% for t in item.type %}<span title="{{ t[0] }}"><i class="icon-{{ t[1] }}"></i></span>{% endfor %}</p></dt>
+        <dd><p><a href="{{ item.link }}">{{ item.title }}</a></p></dd>
+        {% if item.content %}
+          <dt></dt>
+          <dd>{{ item.content }}</dd>
+        {% endif %}
+      </div>
+  {% endfor %}
+{% endblock %}

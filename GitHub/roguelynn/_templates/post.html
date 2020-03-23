@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block extrahead %}
+  {% if item.meta %}
+    {% set keywords = item.meta|join(",") %}
+      <meta name="keywords" content="{{ keywords }}">
+  {% endif %}
+  <meta name="og:title" content="{{ item.title }}">
+  <meta name="twitter:title" content="{{ item.title }}">
+
+  <meta name="og:type" content="article">
+  <meta name="og:url" content="{{ get_url(item.url, absolute=True) }}">
+  {% if item.og_image %}
+    <meta name="og:image" content="{{ get_url(get_asset(item.og_image), absolute=True) }}">
+    <meta name="twitter:image" content="{{ get_url(get_asset(item.og_image), absolute=True) }}">
+  {% else %}
+    <meta name="og:image" content="{{ get_url(get_asset('images/favicon/favicon.ico'), absolute=True) }}">
+  {% endif %}
+  <meta name="og:article:published_time" content="{{ item.date }}">
+  <meta name="og:article:author" content="Lynn Root">
+  {% if item.updated_at %}
+    <meta name="og:article:modified_time" content="{{ item.updated_at }}">
+  {% endif %}
+  {% if item.revised %}
+    <meta name="og:article:modified_time" content="{{ item.revised }}">
+  {% endif %}
+  {% if item.description %}
+    <meta name="og:description" content="{{ item.description|striptags|truncate(200, True) }}">
+    <meta name="twitter:description" content="{{ item.description|striptags|truncate(200, True) }}">
+  {% else %}
+    <meta name="og:description" content="{{ item.excerpt|striptags|truncate(200, True) }}">
+    <meta name="twitter:description" content="{{ item.excerpt|striptags|truncate(200, True) }}">
+  {% endif %}
+  {% if item.tags %}
+    {% for tag in item.tags %}
+      <meta name="og:article:tag" content="{{ tag }}">
+    {% endfor %}
+  {% endif %}
+
+{% endblock %}
+{% block me %}<li class="navbar-me"><a href="{{ get_url('/') }}" title="Home">lynn root</a></li>{% endblock %}
+{% block content %}
+<article class="hentry">
+<h1 class="entry-title">{{ item.title }}</h1>
+<div>
+    <small>
+      <time class="published" datetime="{{ item.date }}">Published {{ item.date }}</time>
+      {% if item.updated_at %}
+        <time class="updated" datetime="{{ item.updated_at }}">&#8226 Updated {{ item.updated_at }}</time>
+      {% endif %}
+      <span class="show-author">by <a href="{{ get_url('/about/') }}">Lynn Root</a></span>
+    </small>
+  {% if item.tags %}
+    <span class="rogue-tags">
+    {% for tag in item.tags %}
+      {% set data = posts.tags[tag] %}
+      <span class="rogue-tag"><a href="{{ get_url(data.url) }}" alt="{{ tag }}">{{ tag }}</a></span>
+    {% endfor %}
+    </span>
+  {% endif %}
+</div>
+<hr/>
+  <div class="rogue-content entry-content">
+    {{ item.content }}
+    <p id="content-end">&#8756;</p>
+  </div>
+  </article>
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'roguelynn';
+
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+{% endblock %}

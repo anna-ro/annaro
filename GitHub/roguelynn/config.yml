@@ -1,0 +1,42 @@
+base_url: /
+title: Ana Riveros
+author: annaro
+domain: www.annaro.be
+date_format: "%B %d, %Y"
+posts_url: /words/<slug>/
+tags_url: /tags/
+tag_layout: tag.html
+pygmentize: true
+social:
+    github: anna-ro
+    twitter:
+jinja:
+    extensions:
+        - jinja2.ext.loopcontrols
+hoep:
+    render_flags:
+        toc: true
+include:
+    - robots.txt
+    - .htaccess
+containers:
+    past_talks:
+        url: /talks/<slug>/
+    upcoming_talks:
+        url: /talks/<slug>/
+        order: asc
+    about:
+        url: /about/
+    projects:
+        url: /projects/<slug>/
+    resume:
+        url: /resume/
+    drafts:
+        url: /~drafts/
+    tutorials:
+        url: /tutorials/<slug>/
+        order: asc
+    resources:
+        url: /lmgtfy/<slug>/
+    fingerprints:
+        url: /fingerprints/<slug>/

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}Circus{% endblock %}
+{% block extrahead %}
+  <meta name="keywords" content="python django kerberos infrastructure">
+
+  <meta name="og:title" content="Introduce Django to your old Friends – or Foes">
+  <meta name="og:type" content="website">
+  <meta name="og:url" content="{{ get_url(absolute=True) }}circus">
+  <meta name="og:image" content="{{ get_url(get_asset('images/favicon/favicon.ico'), absolute=True) }}">
+  <meta name="og:description" content="How to set up your Django application for internal authentication">
+
+  <meta name="twitter:title" content="Introduce Django to your old Friends – or Foes">
+  <meta name="twitter:description" content="How to set up your Django application for internal authentication">
+{% endblock %}
+{% block me %}<li class="navbar-me"><a href="{{ get_url('/') }}" title="Home">lynn root</a></li>{% endblock %}
+{% block content %}
+    <section id="archive">
+        <h2>Introduce Django to your old Friends – or Foes</h2>
+        {% for post in posts %}
+        {% if 'circus' in post.category %}{% if 'intro' in post.category %}
+          <div class='ten columns gray' id="date-header">
+    <p>
+      {{ post.date }}
+  {% if post.updated_at %}
+      revised {{ post.updated_at }}
+  {% endif %}
+    </p>
+
+  </div>
+            <article>
+                <p>{{ post.content }}</p>
+
+            </article>
+            {% endif %}{% endif %}
+                {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block extrahead %}
+  <meta name="keywords" content="digital marketing marketer social media specialist content manager business coach">
+
+  <meta name="og:title" content="Home – Ana Riveros">
+  <meta name="og:type" content="website">
+  <meta name="og:url" content="{{ get_url(absolute=True) }}">
+  <meta name="og:image" content="{{ get_url(get_asset('images/favicon/favicon.ico'), absolute=True) }}">
+  <meta name="og:description" content="Homepage and blog of Ana Riveros. Digital Marketer in Colombia.">
+
+  <meta name="twitter:title" content="Home – Ana Riveros">
+  <meta name="twitter:description" content="Homepage and blog of Ana Riveros. Digital Marketer in Colombia">
+{% endblock %}
+{% block content %}
+<div id="rogue-splash">
+    <h1>Hello there!</h1>
+    <br/>
+    <h2>I’m <abbr title="sudo make me a sandwich." id="root">Ana Riveros</abbr>.</h2>
+    <h2>Digital Marketer. Content Manager. Social Media Specialist.</h2>
+</div>
+{% endblock %}

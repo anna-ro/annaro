@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}About{% endblock %}
+{% block extrahead %}
+  <meta name="keywords" content="digital marketing specialist content management community manager">
+
+  <meta name="og:title" content="About me">
+  <meta name="og:url" content="{{ get_url(absolute=True) }}about">
+  <meta name="og:type" content="website">
+  <meta name="og:image" content="{{ get_url(get_asset('images/favicon/favicon.ico'), absolute=True) }}">
+  <meta name="og:description" content="About Lynn Root">
+
+  <meta name="twitter:title" content="About">
+  <meta name="twitter:description" content="About Lynn Root">
+{% endblock %}
+{% block me %}<li class="navbar-me"><a href="{{ get_url('/') }}" title="Home">lynn root</a></li>{% endblock %}
+{% block content %}
+  <div class="page-header"><h1>About</h1></div>
+  {% for post in containers.about %}
+    {{ post.content }}
+  {% endfor %}
+
+  <hr/>
+
+  <h3>Highlighted Posts</h3>
+  {% for post in posts %}
+    {% if 'highlight' in post.category and 'words' in post.category %}
+      <ul>
+        <li><a href="{{ get_url(post.url) }}">{{ post.title }}</a></li>
+      </ul>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}Projects{% endblock %}
+{% block extrahead %}
+  <meta name="keywords" content="python pyladies raml infrastructure sre devops djangogirls">
+
+  <meta name="og:title" content="Projects">
+  <meta name="og:url" content="{{ get_url(absolute=True) }}projects">
+  <meta name="og:type" content="website">
+  <meta name="og:image" content="{{ get_url(get_asset('images/favicon/favicon.ico'), absolute=True) }}">
+
+  <meta name="twitter:title" content="Projects">
+  <meta name="twitter:description" content="Projects by Lynn Root">
+{% endblock %}
+{% block me %}<li class="navbar-me"><a href="{{ get_url('/') }}" title="Home">lynn root</a></li>{% endblock %}
+{% block content %}
+  <div class="page-header">
+    <h1>Projects</h1>
+  </div>
+  {% for project in containers.projects %}
+      <div class="dl-horizontal dl-horizontal-border" style="padding-bottom: 10px;">
+        <dt></dt>
+        <dd><h4>{{ project.title }}</h4></dd>
+        <dt style="padding-top:5px;">
+        <!-- <dt style="margin-top:9px;"> -->
+          {% if project.proj_url %}<a href="{{ project.proj_url }}" alt="{{ project.title }} site"><i class="icon-link"></i></a>{% endif %}
+          {% if project.docs_url %}<a href="{{ project.docs_url }}" alt="Project documentation"><i class="icon-open-book"></i></a>{% endif %}
+          {% if project.code_url %}<a href="{{ project.code_url }}" alt="Project code"><i class="icon-flow-branch"></i></a>{% endif %}
+          {% if project.license_url %}<a href="{{ project.license_url }}" alt="Open source license: {{ project.license }}"><i class="icon-text"></i></a>{% endif %}
+        </dt>
+        <dd><p>{{ project.excerpt }}</p></dd>
+      </div>
+  {% endfor %}
+{% endblock %}
